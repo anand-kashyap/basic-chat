@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Chat from './Chat';
-import { Message } from '../types';
+import { MessageType } from '../types';
 
 const friends = ['Alice', 'Bob', 'Charlie'];
 
@@ -14,7 +14,7 @@ const getInitialMessages = () => friends.reduce((acc, friend) => ({
 
 const App: React.FC = () => {
   const [selectedFriend, setSelectedFriend] = useState<string>(friends[0]);
-  const [chatData, setChatData] = useState<{ [key: string]: Message[] }>(getInitialMessages);
+  const [chatData, setChatData] = useState<{ [key: string]: MessageType[] }>(getInitialMessages);
 
   const handleSendMessage = (content: string) => {
     setChatData((prev) => ({
@@ -41,6 +41,7 @@ const App: React.FC = () => {
           ))}
         </ul>
       </div>
+
       <div className='flex-1 flex flex-col p-4'>
         <h2 className='mb-4 text-lg font-bold'>Chat with {selectedFriend}</h2>
         <div className='flex-1 overflow-hidden'>

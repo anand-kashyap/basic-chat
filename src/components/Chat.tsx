@@ -1,19 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChatProps } from '../types';
+import MessageType from './Message';
 
 const Chat: React.FC<ChatProps> = ({ friend, messages, onSendMessage }) => {
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if(inputRef.current) {
+    if (inputRef.current) {
       setInput('');
       inputRef.current.focus();
     }
   }, [inputRef.current, friend]);
 
   const handleSend = () => {
-    const val = input.trim()
+    const val = input.trim();
     if (val) {
       onSendMessage(val);
       setInput('');
@@ -28,17 +29,10 @@ const Chat: React.FC<ChatProps> = ({ friend, messages, onSendMessage }) => {
     <div className='flex flex-col h-full p-4 bg-gray-100 rounded-lg'>
       <div className='flex flex-col flex-1 overflow-y-auto mb-4'>
         {messages.map((msg, index) => (
-          <div key={index} className={`mb-2 ${msg.sender === 'me' ? 'my-message md:ml-36' : 'md:mr-36'}`}>
-            <div
-              className={`inline-block px-4 py-2 rounded-lg text-white ${
-                msg.sender === 'me' ? 'bg-blue-500' : 'bg-gray-500'
-              }`}
-            >
-              {msg.content}
-            </div>
-          </div>
+          <MessageType key={index} message={msg} />
         ))}
       </div>
+
       <div className='flex'>
         <input
           ref={inputRef}

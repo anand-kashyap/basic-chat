@@ -1,12 +1,12 @@
 
-interface Message {
+interface MessageType {
   sender: string;
   content: string;
 }
 interface ChatProps {
   friend: string;
-  messages: Message[];
+  messages: MessageType[];
   onSendMessage: (content: string) => void;
 }
 
-export type {Message, ChatProps}
+export type {MessageType, ChatProps}
